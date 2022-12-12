@@ -1,15 +1,20 @@
-package cart;
+package Cart;
 
 public class Orange extends Item {
    
     private String type;
     
+    //Constructor
     public Orange() {
-        super("orange", "Orange");
+        super("Orange", "Navel Orange");
     }
-    
-    public String getType() {return type;}
+
+    //Getter and Setter
+    public String getType() {
+        return type;
+    }
     public void setType(String type) {
         this.type = type;
     }
+
 }

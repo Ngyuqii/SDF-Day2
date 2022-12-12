@@ -1,15 +1,20 @@
-package cart;
+package Cart;
 
 public class Apple extends Item {
    
     private String type;
 
+    //Constructor
     public Apple() {
-        super("apple", "Apple");
+        super("Apple", "Fuji Apple");
     }
 
-    public String getType() {return type;}
+    //Getter and Setter
+    public String getType() {
+        return type;
+    }
     public void setType(String type) {
         this.type = type;
     }
+
 }
