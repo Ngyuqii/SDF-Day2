@@ -5,10 +5,10 @@ import java.io.Console;
 public class CartMain {
 
     //Declare constant fields
-    public static final String CHECKOUT = "checkout";
-    public static final String ADD = "add";
-    public static final String REMOVE = "remove";
-    public static final String LIST = "list";
+    public static final String CHECKOUT = "Checkout";
+    public static final String ADD = "Add";
+    public static final String REMOVE = "Remove";
+    public static final String LIST = "List";
 
     public static void main(String[] args) {
      
@@ -17,55 +17,65 @@ public class CartMain {
 
         //Create an instance of CartClass
         CartClass shoppingCart = new CartClass();
+        System.out.println("Welcome to your shopping cart.");
+        System.out.println("Add / Remove / List / Checkout");
 
         while (!stop) {
-            String line = cons.readLine("> ");
+            String line = cons.readLine("Please input your command. >");
             String[] terms = line.trim().split(" ");
 
             switch (terms[0]) {
-                // checkout or checkout .03
-                case CHECKOUT:
-                    Float discount = 0f;
-                    // Check if discount is applied
-                    if (terms.length > 0)
-                        discount = Float.parseFloat(terms[1]);
-                    shoppingCart.calculate(discount);
-                    stop = true;
-                    break;
 
-                // add apple quantity price
                 case ADD:
                     String item = terms[1];
                     Integer quantity = Integer.parseInt(terms[2]);
                     Float price = Float.parseFloat(terms[3]);
-                    if (shoppingCart.addToCart(item, quantity, price))
+
+                    //Boolean addToCart is true
+                    if (shoppingCart.addToCart(item, quantity, price)) {
                         System.out.printf("%s added to your shopping cart\n", item);
-                    else
+                    }
+                    else {
                         System.err.printf("%s is not in our inventory.\n", item);
+                    }
                     break;
 
-                // remove 3
                 case REMOVE:
                     Integer index = Integer.parseInt(terms[1]);
-                    if (shoppingCart.removeFromCart(index))
-                        System.out.println("Item removed from shopping cart");
-                    else
-                        System.out.println("Cannot find item in the shopping cart");
+
+                    //Boolean removeFromCart is true
+                    if (shoppingCart.removeFromCart(index)) {
+                        System.out.println("Item removed from shopping cart.");
+                    }
+                    else {
+                        System.err.println("Cannot find item in the shopping cart.");
+                    }
                     break;
 
-                // list
                 case LIST:
                     shoppingCart.listContents();
                     break;
 
+                case CHECKOUT:
+                    // Check if discount is applied
+                    if (terms.length > 1) {
+                        Integer discount = Integer.parseInt(terms[1]);
+                        shoppingCart.calculate(discount);
+                    }
+                    else {
+                        shoppingCart.calculate();
+                    }
+                    stop = true;
+                    break;
+
                 default:
-                    System.out.printf("Unknown command: %s\n", terms[0]);
+                    System.out.printf("Unknown command: %s.\n", terms[0]);
             }
-            System.out.println();
+
         }
 
-        System.out.println("Thank you for shopping with us");
+        System.out.println("Thank you, have a nice day.");
     
     }
-    
+
 }
