@@ -1,4 +1,4 @@
-package Car;
+package car;
 
 /*
 Not necessary to import class if in the same package
